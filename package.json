@@ -1,7 +1,7 @@
 {
   "name": "homebridge-fake-hksv",
   "displayName": "Fake HKSV Camera",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Homebridge plugin: a fake HomeKit Secure Video camera that shows a static image.",
   "license": "MIT",
   "author": "Davide Farina",
