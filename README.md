@@ -15,19 +15,20 @@ It does not talk to any real camera and it never detects motion by itself.
 ```json
 {
   "platform": "FakeHKSV",
-  "name": "Fake Camera",
-  "imagePath": "/home/pi/camera.jpg"
+  "name": "Fake Camera"
 }
 ```
+
+The camera shows the image bundled with the plugin (`assets/feed.jpg`), so every user sees the same feed.
 
 | Option | Required | Default | Description |
 | --- | --- | --- | --- |
 | `name` | yes | `Fake Camera` | Accessory name. |
-| `imagePath` | yes | | Absolute path of the static image (JPEG or PNG). The image is read on every snapshot/stream, so you can replace the file without restarting. |
+| `imagePath` | no | bundled image | Absolute path of your own JPEG or PNG to show instead. It is read on every snapshot/stream, so you can replace the file without restarting. |
 | `ffmpegPath` | no | `ffmpeg` | Path of the ffmpeg executable. |
 | `serialNumber` | no | `FHKSV-0001` | Serial number shown in the Home app. |
 
-Without a valid `imagePath` the camera is not published and a warning is logged.
+If you set an `imagePath` that cannot be read, the camera is not published and a warning is logged.
 
 ## Pairing
 

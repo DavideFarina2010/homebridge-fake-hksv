@@ -5,7 +5,8 @@ const { EventEmitter } = require('node:events');
 const { PassThrough } = require('node:stream');
 const hap = require('@homebridge/hap-nodejs');
 
-const { parseConfig } = require('../lib/config');
+const fs = require('node:fs');
+const { parseConfig, DEFAULT_IMAGE } = require('../lib/config');
 const { snapshotArgs, streamArgs, recordingArgs } = require('../lib/ffmpeg');
 const { Mp4PacketSplitter } = require('../lib/mp4');
 const { buildControllerOptions } = require('../lib/camera');
@@ -44,9 +45,14 @@ test('plugin entry registers the platform', () => {
   assert.strictEqual(registered[0], 'FakeHKSV');
 });
 
-test('parseConfig: missing, unreadable and non-file image paths give an error', () => {
-  assert.match(parseConfig({}).error, /imagePath is not set/);
-  assert.match(parseConfig(undefined).error, /imagePath is not set/);
+test('bundled default image exists and is a JPEG', () => {
+  const head = fs.readFileSync(DEFAULT_IMAGE).subarray(0, 3);
+  assert.deepStrictEqual([...head], [0xff, 0xd8, 0xff]);
+  assert.strictEqual(parseConfig({}).imagePath, DEFAULT_IMAGE);
+  assert.strictEqual(parseConfig(undefined).imagePath, DEFAULT_IMAGE);
+});
+
+test('parseConfig: unreadable and non-file image paths give an error', () => {
   const missing = { statSync: () => { throw Object.assign(new Error('x'), { code: 'ENOENT' }); } };
   assert.match(parseConfig({ imagePath: '/nope.jpg' }, missing).error, /ENOENT/);
   assert.match(parseConfig({ imagePath: '/dir' }, { statSync: () => ({ isFile: () => false }) }).error, /not a file/);
@@ -55,6 +61,7 @@ test('parseConfig: missing, unreadable and non-file image paths give an error', 
 test('parseConfig: applies defaults', () => {
   const c = parseConfig({ imagePath: ' /a.jpg ', name: '  ', ffmpegPath: '/opt/ffmpeg' }, okFs);
   assert.deepStrictEqual(c, { name: 'Fake Camera', imagePath: '/a.jpg', ffmpegPath: '/opt/ffmpeg', serialNumber: 'FHKSV-0001' });
+  assert.strictEqual(parseConfig({ imagePath: '  ' }, okFs).imagePath, DEFAULT_IMAGE);
 });
 
 test('snapshotArgs outputs one jpeg frame on stdout', () => {

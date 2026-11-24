@@ -5,7 +5,7 @@
   "headerDisplay": "Fake HomeKit Secure Video camera showing a static image. Requires ffmpeg.",
   "schema": {
     "type": "object",
-    "required": ["name", "imagePath"],
+    "required": ["name"],
     "properties": {
       "name": {
         "title": "Name",
@@ -14,7 +14,7 @@
       },
       "imagePath": {
         "title": "Image path",
-        "description": "Absolute path of the static image (JPEG or PNG) shown as the camera feed.",
+        "description": "Optional. Absolute path of a JPEG or PNG to show instead of the image bundled with the plugin.",
         "type": "string"
       },
       "ffmpegPath": {
