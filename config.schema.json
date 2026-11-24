@@ -1,0 +1,33 @@
+{
+  "pluginAlias": "FakeHKSV",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "Fake HomeKit Secure Video camera showing a static image. Requires ffmpeg.",
+  "schema": {
+    "type": "object",
+    "required": ["name", "imagePath"],
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Fake Camera"
+      },
+      "imagePath": {
+        "title": "Image path",
+        "description": "Absolute path of the static image (JPEG or PNG) shown as the camera feed.",
+        "type": "string"
+      },
+      "ffmpegPath": {
+        "title": "ffmpeg path",
+        "description": "Path of the ffmpeg executable. Leave empty to use ffmpeg from the PATH.",
+        "type": "string",
+        "default": "ffmpeg"
+      },
+      "serialNumber": {
+        "title": "Serial number",
+        "type": "string",
+        "default": "FHKSV-0001"
+      }
+    }
+  }
+}
