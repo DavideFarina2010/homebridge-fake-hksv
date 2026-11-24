@@ -1,0 +1,44 @@
+{
+  "name": "homebridge-fake-hksv",
+  "displayName": "Fake HKSV Camera",
+  "version": "0.0.1",
+  "description": "Homebridge plugin: a fake HomeKit Secure Video camera that shows a static image.",
+  "license": "MIT",
+  "author": "Davide Farina",
+  "homepage": "https://github.com/DavideFarina2010/homebridge-fake-hksv#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavideFarina2010/homebridge-fake-hksv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DavideFarina2010/homebridge-fake-hksv/issues"
+  },
+  "main": "index.js",
+  "keywords": [
+    "homebridge-plugin",
+    "supports-hap",
+    "homekit",
+    "camera",
+    "hksv",
+    "homekit-secure-video"
+  ],
+  "engines": {
+    "node": ">=20.15.0",
+    "homebridge": "^1.8.0 || ^2.0.0-beta.0 || ^2.0.0"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "config.schema.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "devDependencies": {
+    "@homebridge/hap-nodejs": "^2.3.0",
+    "homebridge": "^2.5.0"
+  }
+}

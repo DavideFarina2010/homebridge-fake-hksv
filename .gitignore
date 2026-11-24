@@ -1,0 +1,16 @@
+node_modules/
+package-lock.json
+npm-debug.log*
+*.tgz
+.DS_Store
+.env
+.vscode/
+.idea/
+
+# Stato di sviluppo
+persist/
+accessories/
+*.tmp
+
+# Note di lavoro per Claude Code
+CLAUDE.md
